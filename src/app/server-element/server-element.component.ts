@@ -10,7 +10,10 @@ import {
   AfterContentChecked,
   AfterViewInit,
   AfterViewChecked,
-  OnDestroy
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+  ContentChild
 } from "@angular/core";
 
 @Component({
@@ -36,8 +39,14 @@ export class ServerElementComponent
     console.log("constructor called");
   }
 
+  @ViewChild("heading") header: ElementRef;
+  @ContentChild("contentParagraph") paragraph: ElementRef;
   ngOnInit() {
     console.log("ngONit called");
+    console.log("text content" + this.header.nativeElement.textContent);
+    console.log(
+      "contentParagraph content" + this.paragraph.nativeElement.textContent
+    );
   }
   ngOnChanges(changes: SimpleChanges) {
     console.log("ngOnChanges called");
@@ -48,6 +57,7 @@ export class ServerElementComponent
   }
   ngAfterViewInit() {
     console.log("ngAfterViewInit");
+    console.log("text content" + this.header.nativeElement.textContent);
   }
   ngAfterViewChecked() {
     console.log("ngAfterViewChecked");
@@ -56,10 +66,13 @@ export class ServerElementComponent
     console.log("ngOnDestroy");
   }
 
-  // ngAfterContentInit() {
-  //   console.log("ngAfterContentInit");
-  // }
-  // ngfterContentChecked() {
-  //   console.log("ngfterContentChecked");
-  // }
+  ngAfterContentInit() {
+    console.log("ngAfterContentInit");
+    console.log(
+      "contentParagraph content" + this.paragraph.nativeElement.textContent
+    );
+  }
+  ngfterContentChecked() {
+    console.log("ngfterContentChecked");
+  }
 }
